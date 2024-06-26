@@ -1,37 +1,45 @@
 // context/ThemeContext.js
 import React, { createContext, useContext, useState } from 'react';
-import { ThemeProvider as StyledThemeProvider } from 'styled-components/native';
 
 const ThemeContext = createContext();
 
-const lightTheme = {
-  background: '#ffffff',
-  text: '#000000',
-  cardBackground: '#f9f9f9',
-  borderColor: '#e2e2e2',
-  subText: '#6e6e6e',
+export const lightTheme = {
+  background: '#fff',
+  text: '#000',
+  color: '#f2f2f2',
+  tabsBgColor: '#fff',
+  card: '#fff',
+  borderColor: '#f4f4f4',
+  iconBackground: '#f4f4f4',
+  headerBackground: '#fff',
+  transactionBackground: '#fff',
+  transactionText: '#0D0D26',
 };
 
-const darkTheme = {
-  background: '#000000',
-  text: '#ffffff',
-  cardBackground: '#333333',
-  borderColor: '#444444',
-  subText: '#9e9e9e',
+export const darkTheme = {
+  background: '#161622',
+  text: '#fff',
+  subText: '#a2a2a7',
+  card: '#161622',
+  color: '#333',
+  tabsBgColor: '#27273a',
+  borderColor: '#1c1d2a',
+  iconBackground: '#1e1e2d',
+  headerBackground: '#161622',
+  transactionBackground: '#161622',
+  transactionText: '#fff',
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(lightTheme);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const toggleTheme = () => {
-    setTheme(theme === lightTheme ? darkTheme : lightTheme);
+    setIsDarkTheme(!isDarkTheme);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <StyledThemeProvider theme={theme}>
-        {children}
-      </StyledThemeProvider>
+    <ThemeContext.Provider value={{ isDarkTheme, toggleTheme }}>
+      {children}
     </ThemeContext.Provider>
   );
 };
